@@ -10,8 +10,6 @@ namespace WebTinNghia.Data.Repositories
     public interface IPostRepository : IRepository<Post>
     {
         IEnumerable<Post> GetAllByTag(string tag, int pageIndex, int pageSize, out int totalRow);
-        IEnumerable<Post> GetMultiPaging(string tag, int page, int pageSize, out int totalRow);
-        IEnumerable<Post> GetMultiPaging(Func<object, object> p);
     }
 
     public class PostRepository : RepositoryBase<Post>, IPostRepository
@@ -28,8 +26,11 @@ namespace WebTinNghia.Data.Repositories
                         where pt.TagID == tag && p.Status
                         orderby p.CreatedDate descending
                         select p;
+
             totalRow = query.Count();
+
             query = query.Skip((pageIndex - 1) * pageSize).Take(pageSize);
+
             return query;
         }
     }
