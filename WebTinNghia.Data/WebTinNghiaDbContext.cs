@@ -10,7 +10,8 @@ namespace WebTinNghia.Data
 {
     public class WebTinNghiaDbContext : DbContext
     {
-        public WebTinNghiaDbContext() : base("WebTinNghiaConnection") {
+        public WebTinNghiaDbContext() : base("WebTinNghiaConnection")
+        {
             this.Configuration.LazyLoadingEnabled = false;
         }
         public DbSet<Footer> Footers { set; get; }
